@@ -1,9 +1,9 @@
-import { useState, useEffect,useRef } from "react";
-import { nanoid } from "nanoid";
 import ContactForm from "./components/ContactForm/ContactForm";
 import ContactList from "./components/ContactList/ContactList";
+import { useState, useEffect, useRef } from "react";
+import { Container, Paper } from "@mui/material";
 import Filter from "./components/Filter/Filter";
-import "./App.css";
+import { nanoid } from "nanoid";
 
 const App = () => {
   const [contacts, setContacts] = useState([
@@ -27,7 +27,7 @@ const App = () => {
   // Saving contacts to local storage
   useEffect(() => {
     if (!isFirstRender.current) {
-      window.localStorage.setItem('contacts', JSON.stringify(contacts));
+      window.localStorage.setItem("contacts", JSON.stringify(contacts));
     }
     isFirstRender.current = false;
   }, [contacts]);
@@ -71,18 +71,34 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h1>Phonebook</h1>
-      <ContactForm onSubmitData={formSubmitHandler} />
-
-      <h2>Contacts</h2>
-      <Filter setFilterToState={setFilterToState} />
-      <ContactList
-        contacts={filterArr(contacts)}
-        del={deleteContactFromContactList}
-      />
-      
-    </div>
+    <Container>
+      <Paper
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          gap: 1,
+          overflow: "hidden",
+          mt: 2,
+          p: 2,
+        }}
+      >
+        <h1>Phonebook</h1>
+        <Paper sx={{ p: 2 }}>
+          <ContactForm onSubmitData={formSubmitHandler} />
+        </Paper>
+        <Paper sx={{ p: 2 }}>
+          <h2 style={{ display: "flex", justifyContent: "center" }}>
+            Contacts
+          </h2>
+          <Filter setFilterToState={setFilterToState} />
+          <ContactList
+            contacts={filterArr(contacts)}
+            del={deleteContactFromContactList}
+          />
+        </Paper>
+      </Paper>
+    </Container>
   );
 };
 

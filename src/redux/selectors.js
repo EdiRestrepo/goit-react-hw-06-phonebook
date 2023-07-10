@@ -1,0 +1,1 @@
+// selectors.js - archivo de declaración de las funciones-selectores

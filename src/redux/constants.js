@@ -1,0 +1,1 @@
+// constants.js - archivo para almacenar constantes (por ejemplo, los valores del filtro de estado).

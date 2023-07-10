@@ -1,8 +1,9 @@
+import DeleteIcon from "@mui/icons-material/Delete";
 import css from "./ContactList.module.css";
+import { IconButton } from "@mui/material";
 import PropTypes from "prop-types";
 
 export const ContactList = ({ contacts, del }) => {
-  
   const deleteId = (Id) => {
     del(Id);
   };
@@ -16,13 +17,14 @@ export const ContactList = ({ contacts, del }) => {
               <li>
                 {name}: {number}
               </li>
-              <button
+              <IconButton
                 className={css["delete-contact"]}
                 data-id={id}
                 onClick={() => deleteId(id)}
+                edge="end"
               >
-                Delete
-              </button>
+                <DeleteIcon />
+              </IconButton>
             </div>
           );
         })}

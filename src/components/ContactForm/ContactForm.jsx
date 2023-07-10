@@ -1,8 +1,8 @@
+import { Button, TextField } from "@mui/material";
 import css from "./ContactForm.module.css";
 import PropTypes from "prop-types";
 
 const ContactForm = ({ onSubmitData }) => {
-  
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -14,33 +14,36 @@ const ContactForm = ({ onSubmitData }) => {
   return (
     <div className={css["form-container"]}>
       <form className={css["contact-form"]} onSubmit={handleSubmit}>
-        <div className={css["input-container"]}>
-          <label>Name</label>
-          <br />
-          <input
-            type="text"
-            name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-          />
-        </div>
-        <div className={css["input-container"]}>
-          <label>Number</label>
-          <br />
-          <input
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            placeholder="Ejemplo: 123-45-78"
-            required
-          />
-        </div>
+        <TextField
+          type="text"
+          name="name"
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          required
+          label="Name"
+          variant="outlined"
+          size="small"
+          fullWidth
+        />
+        <TextField
+          type="tel"
+          name="number"
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          required
+          label="Phone: example 123-45-78"
+          variant="outlined"
+          size="small"
+          fullWidth
+        />
         <div>
-          <button className={css["add-contact"]} type="submit">
+          <Button
+            className={css["add-contact"]}
+            type="submit"
+            variant="outlined"
+          >
             Add contact
-          </button>
+          </Button>
         </div>
       </form>
     </div>
