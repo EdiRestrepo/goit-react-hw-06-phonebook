@@ -17,6 +17,7 @@ const App = () => {
 
   // Loading contacts from local storage
   useEffect(() => {
+    
     const savedContacts = localStorage.getItem("contacts");
     const parsedContacts = JSON.parse(savedContacts);
     if (parsedContacts.length) {
