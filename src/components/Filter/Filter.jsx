@@ -1,10 +1,12 @@
+import { useDispatch } from "react-redux";
+import { setFilter } from "../../redux/filterSlice";
 import { TextField } from "@mui/material";
-import PropTypes from "prop-types";
 
-export const Filter = ({ setFilterToState }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
+  
   const setFilterValue = (event) => {
-    let value = event.currentTarget.value.toUpperCase();
-    setFilterToState(value);
+    dispatch(setFilter(event.currentTarget.value.toUpperCase()))
   };
 
   return (
@@ -19,6 +21,4 @@ export const Filter = ({ setFilterToState }) => {
 
 export default Filter;
 
-Filter.propTypes = {
-  setFilterToState: PropTypes.func.isRequired,
-};
+

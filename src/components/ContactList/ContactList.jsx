@@ -1,17 +1,28 @@
+import { getContacts, getFilter } from "../../redux/selectors";
+import { deleteContact } from "../../redux/contactsSlice";
+import { useSelector, useDispatch } from "react-redux";
 import DeleteIcon from "@mui/icons-material/Delete";
 import css from "./ContactList.module.css";
 import { IconButton } from "@mui/material";
-import PropTypes from "prop-types";
 
-export const ContactList = ({ contacts, del }) => {
-  const deleteId = (Id) => {
-    del(Id);
+export const ContactList = () => {
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
+  const dispatch = useDispatch();
+
+  const deleteId = (contacts) => {
+    dispatch(deleteContact(contacts));
+  };
+
+  const filterArr = (fArr) => {
+    let newArr = fArr.filter((cur) => cur.name.toUpperCase().includes(filter));
+    return newArr;
   };
 
   return (
     <div>
       <ul>
-        {contacts?.map(({ name, number, id }) => {
+        {filterArr(contacts)?.map(({ name, number, id }) => {
           return (
             <div className={css["container-contact"]} key={id}>
               <li>
@@ -34,8 +45,3 @@ export const ContactList = ({ contacts, del }) => {
 };
 
 export default ContactList;
-
-ContactList.propTypes = {
-  contacts: PropTypes.array,
-  del: PropTypes.func,
-};

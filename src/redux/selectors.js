@@ -1,1 +1,2 @@
-// selectors.js - archivo de declaración de las funciones-selectores
+export const getContacts = state => state.contacts;
+export const getFilter = state => state.filter;

@@ -1,13 +1,24 @@
+import { addContact } from "../../redux/contactsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getContacts } from "../../redux/selectors";
 import { Button, TextField } from "@mui/material";
 import css from "./ContactForm.module.css";
-import PropTypes from "prop-types";
 
-const ContactForm = ({ onSubmitData }) => {
+const ContactForm = () => {
+  // Obtenemos el enlace a la función de envío de acciones
+  const dispatch = useDispatch();
+  // Obtener un array con los contactos del estado de Redux
+  const contacts = useSelector(getContacts);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     let contactForAdd = { name: form.name.value, number: form.number.value };
-    onSubmitData(contactForAdd);
+    if (contacts.some(({ name }) => name === contactForAdd.name)) {
+      alert(`${contactForAdd.name} is already in contacts`);
+      return;
+    }
+    dispatch(addContact(contactForAdd));
     form.reset();
   };
 
@@ -48,10 +59,6 @@ const ContactForm = ({ onSubmitData }) => {
       </form>
     </div>
   );
-};
-
-ContactForm.propTypes = {
-  onSubmitData: PropTypes.func.isRequired,
 };
 
 export default ContactForm;
